@@ -23,7 +23,7 @@ const firstPromise = new Promise((resolve, reject) => {
 
   const timerId = setTimeout(() => {
     if (!isDone) {
-      reject(new Error('First promise was rejected', 'error'));
+      reject(new Error('First promise was rejected'));
     }
   }, 3000);
 
@@ -39,7 +39,9 @@ const firstPromise = new Promise((resolve, reject) => {
   document.addEventListener('click', handleClick);
 });
 
-firstPromise.then(successHandler).catch(errorHandler);
+firstPromise.then(successHandler).catch((error) => {
+  errorHandler(error.message);
+});
 
 const secondPromise = new Promise((resolve) => {
   let isDone = false;
